@@ -1,0 +1,60 @@
+{
+  "entity": {
+    "sensor": {
+      "energy_total": {
+        "name": "Total energy"
+      },
+      "revenue_total": {
+        "name": "Total revenue"
+      },
+      "last_charging": {
+        "name": "Last charging session"
+      },
+      "connector_status": {
+        "name": "{connector} status"
+      }
+    }
+  },
+  "exceptions": {
+    "update_failed": {
+      "message": "Unable to retrieve data from eCarUp."
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to eCarUp",
+        "description": "Enter your smart-me/eCarUp OAuth client credentials.",
+        "data": {
+          "name": "Account name",
+          "client_id": "Client ID",
+          "client_secret": "Client secret"
+        },
+        "data_description": {
+          "name": "A name to identify this eCarUp account in Home Assistant.",
+          "client_id": "OAuth client ID from the smart-me portal.",
+          "client_secret": "OAuth client secret from the smart-me portal."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate eCarUp",
+        "description": "Enter the new OAuth credentials for this eCarUp account.",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client secret"
+        },
+        "data_description": {
+          "client_id": "OAuth client ID from the smart-me portal.",
+          "client_secret": "OAuth client secret from the smart-me portal."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentication failed. Check the client ID, secret, and API permissions.",
+      "cannot_connect": "Unable to connect to the eCarUp API. Try again later."
+    },
+    "abort": {
+      "already_configured": "This OAuth client is already configured."
+    }
+  }
+}

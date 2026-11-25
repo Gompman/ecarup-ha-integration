@@ -1,0 +1,135 @@
+{
+  "paginationCursor": "sample-pagination-cursor",
+  "histories": [
+    {
+      "id": "sample-session-01",
+      "station": {
+        "id": "sample-station-id",
+        "name": "Sample Charging Station",
+        "connectorNumber": 1,
+        "priceInformation": {
+          "currency": "EUR",
+          "pricePerKwh": 0.4,
+          "pricePerH": 0
+        }
+      },
+      "startTime": "2025-01-15T12:00:00Z",
+      "durationS": 3600,
+      "consumptionKwh": 12.0,
+      "stationOwnerEarnings": {
+        "currency": "EUR",
+        "energy": 4.8,
+        "time": 0,
+        "penalty": 0
+      },
+      "signedTransaction": {
+        "format": "UNKNOWN"
+      },
+      "provider": "CHARGING_PROVIDER_HUBJECT"
+    },
+    {
+      "id": "sample-session-02",
+      "station": {
+        "id": "sample-station-id",
+        "name": "Sample Charging Station",
+        "connectorNumber": 1,
+        "priceInformation": {
+          "currency": "EUR",
+          "pricePerKwh": 0.4,
+          "pricePerH": 0
+        }
+      },
+      "startTime": "2025-03-15T12:00:00Z",
+      "durationS": 7200,
+      "consumptionKwh": 24.0,
+      "stationOwnerEarnings": {
+        "currency": "EUR",
+        "energy": 9.6,
+        "time": 0,
+        "penalty": 0
+      },
+      "signedTransaction": {
+        "format": "UNKNOWN"
+      },
+      "provider": "CHARGING_PROVIDER_HUBJECT"
+    },
+    {
+      "id": "sample-session-03",
+      "station": {
+        "id": "sample-station-id",
+        "name": "Sample Charging Station",
+        "connectorNumber": 1,
+        "priceInformation": {
+          "currency": "EUR",
+          "pricePerKwh": 0.4,
+          "pricePerH": 0
+        }
+      },
+      "startTime": "2025-05-15T12:00:00Z",
+      "durationS": 5400,
+      "consumptionKwh": 18.0,
+      "stationOwnerEarnings": {
+        "currency": "EUR",
+        "energy": 7.2,
+        "time": 0,
+        "penalty": 0
+      },
+      "signedTransaction": {
+        "format": "UNKNOWN"
+      },
+      "provider": "CHARGING_PROVIDER_HUBJECT"
+    },
+    {
+      "id": "sample-session-04",
+      "station": {
+        "id": "sample-station-id",
+        "name": "Sample Charging Station",
+        "connectorNumber": 1,
+        "priceInformation": {
+          "currency": "EUR",
+          "pricePerKwh": 0.4,
+          "pricePerH": 0
+        }
+      },
+      "startTime": "2025-07-15T12:00:00Z",
+      "durationS": 10800,
+      "consumptionKwh": 30.0,
+      "stationOwnerEarnings": {
+        "currency": "EUR",
+        "energy": 12.0,
+        "time": 0,
+        "penalty": 0
+      },
+      "signedTransaction": {
+        "format": "UNKNOWN"
+      },
+      "provider": "CHARGING_PROVIDER_HUBJECT"
+    },
+    {
+      "id": "sample-session-05",
+      "station": {
+        "id": "sample-station-id",
+        "name": "Sample Charging Station",
+        "connectorNumber": 1,
+        "priceInformation": {
+          "currency": "EUR",
+          "pricePerKwh": 0.4,
+          "pricePerH": 0
+        }
+      },
+      "startTime": "2025-09-15T12:00:00Z",
+      "durationS": 3600,
+      "consumptionKwh": 15.0,
+      "stationOwnerEarnings": {
+        "currency": "EUR",
+        "energy": 6.0,
+        "time": 0,
+        "penalty": 0
+      },
+      "signedTransaction": {
+        "format": "UNKNOWN"
+      },
+      "provider": "CHARGING_PROVIDER_HUBJECT"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "sample-station-id",
+  "name": "Sample Charging Station",
+  "serialnumber": 123456789,
+  "latitude": 0.0,
+  "longitude": 0.0,
+  "connectors": [
+    {
+      "id": "sample-station-id",
+      "number": 1,
+      "name": "#1",
+      "description": "",
+      "plugtype": "PLUG_TYPE_TYPE2",
+      "maxpower": 1800,
+      "state": "CHARGING",
+      "activePowerTotal": 1.805,
+      "access": {
+        "type": "PUBLIC",
+        "specialUsers": [
+          {
+            "email": "driver@example.invalid"
+          }
+        ]
+      }
+    }
+  ],
+  "stationGroups": []
+}

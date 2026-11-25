@@ -1,0 +1,763 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "eCarUp API",
+    "contact": {
+      "name": "ecarup uses smart-me oauth provider for authentication.",
+      "url": "https://doc.smart-me.com/interfaces/api#h.1p4hi8nk4xqk"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/v1/station/{stationId}/connectors/{connectorId}/active-charging": {
+      "get": {
+        "tags": [
+          "ActiveChargingProtoService"
+        ],
+        "summary": "Gets the active charging session for a specific connector,\r\nincluding the station groups the station belongs to.",
+        "parameters": [
+          {
+            "name": "stationId",
+            "in": "path",
+            "description": "ID of the station",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectorId",
+            "in": "path",
+            "description": "ID of the connector",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApi.ActiveChargings.ActiveChargingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Google.Rpc.Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/history/station/{id}": {
+      "get": {
+        "tags": [
+          "ChargingHistoryProtoService"
+        ],
+        "summary": "Gets the charging history of a station",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paginationCursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApi.ChargingHistory.GetChargingHistoryResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Google.Rpc.Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/history/driver": {
+      "get": {
+        "tags": [
+          "ChargingHistoryProtoService"
+        ],
+        "summary": "Gets the charging history of this user",
+        "parameters": [
+          {
+            "name": "paginationCursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApi.ChargingHistory.GetChargingHistoryResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Google.Rpc.Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/stations": {
+      "get": {
+        "tags": [
+          "StationProtoService"
+        ],
+        "summary": "Gets all stations of the user",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PublicApi.Stations.StationsFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApi.Stations.GetAllStationsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Google.Rpc.Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/station/{id}": {
+      "get": {
+        "tags": [
+          "StationProtoService"
+        ],
+        "summary": "Gets the details of a station",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApi.Stations.Station"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Google.Rpc.Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Google.Protobuf.WellKnownTypes.Any": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Google.Rpc.Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Google.Protobuf.WellKnownTypes.Any"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ActiveChargings.ActiveChargingResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the charging"
+          },
+          "driverIdentifier": {
+            "type": "string",
+            "description": "ID of the user who started the charging"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicApi.ActiveChargings.ActiveChargingStatus"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "UTC time when the charging was started"
+          },
+          "startMeterValueWh": {
+            "type": "number",
+            "description": "eCarUp internal meter value when the charging was started in Wh",
+            "format": "double"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicApi.ActiveChargings.Price"
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/PublicApi.ActiveChargings.Transaction"
+          },
+          "stationGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.ActiveChargings.StationGroup"
+            },
+            "description": "The groups the station belongs to"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ActiveChargings.ActiveChargingStatus": {
+        "enum": [
+          "ACTIVE",
+          "DEACTIVATION_PENDING"
+        ],
+        "type": "string"
+      },
+      "PublicApi.ActiveChargings.Price": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "Currency of the price"
+          },
+          "consumptionPerKwh": {
+            "type": "number",
+            "description": "Price for energy consumption per kWh",
+            "format": "double"
+          },
+          "timePerH": {
+            "type": "number",
+            "description": "Price for duration of charging per hour",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ActiveChargings.StationGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the station group"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the station group"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A group that a station is assigned to, used for organizational\r\nor access-control purposes (e.g. fleet management, site grouping)."
+      },
+      "PublicApi.ActiveChargings.Transaction": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "description": "ID of the transaction"
+          },
+          "meterStartWh": {
+            "type": "number",
+            "description": "Meter start value the station sent with the StartTransaction in Wh",
+            "format": "double"
+          },
+          "meterStopWh": {
+            "type": "number",
+            "description": "Meter stop value the station sent with the StopTransaction in Wh",
+            "format": "double"
+          },
+          "meterActivePowerW": {
+            "type": "number",
+            "description": "Last Power.Active.Import value the station sent in W",
+            "format": "double"
+          },
+          "meterActiveEnergyWh": {
+            "type": "number",
+            "description": "Last Energy.Active.Import.Register value the station sent in Wh",
+            "format": "double"
+          },
+          "socPercent": {
+            "type": "number",
+            "description": "Last state of charge value the station sent in percent",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the history item"
+          },
+          "station": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistoryStation"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "The start time of the charging"
+          },
+          "durationS": {
+            "type": "integer",
+            "description": "The charging duration in seconds",
+            "format": "int32"
+          },
+          "consumptionKwh": {
+            "type": "number",
+            "description": "The consumption of the charging in kWh",
+            "format": "double"
+          },
+          "driverCosts": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistoryCostsOrEarnings"
+          },
+          "stationOwnerEarnings": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistoryCostsOrEarnings"
+          },
+          "signedTransaction": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistorySignedTransaction"
+          },
+          "driverIdentifier": {
+            "type": "string",
+            "description": "The driver identifier (either an email address or an anonymized identifier)"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingProvider"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingHistoryCostsOrEarnings": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "The currency of the charging"
+          },
+          "energy": {
+            "type": "number",
+            "description": "The costs/earnings for the energy",
+            "format": "double"
+          },
+          "time": {
+            "type": "number",
+            "description": "The costs/earnings for the parking time",
+            "format": "double"
+          },
+          "penalty": {
+            "type": "number",
+            "description": "The costs/earnings for the penalty",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingHistorySignedTransaction": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.SignedTransactionFormat"
+          },
+          "data": {
+            "type": "string",
+            "description": "the data of the signed transaction"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingHistoryStation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the station"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the station when the charging has happened"
+          },
+          "connectorNumber": {
+            "type": "integer",
+            "description": "the number of the connector of the station",
+            "format": "int32"
+          },
+          "ownerId": {
+            "type": "integer",
+            "description": "the ID of the station owner",
+            "format": "int64"
+          },
+          "priceInformation": {
+            "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistoryStationPriceInformation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingHistoryStationPriceInformation": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "The currency of the station"
+          },
+          "pricePerKwh": {
+            "type": "number",
+            "description": "The price per kWh of the station",
+            "format": "double"
+          },
+          "pricePerH": {
+            "type": "number",
+            "description": "The price per Hour (time)",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.ChargingProvider": {
+        "enum": [
+          "CHARGING_PROVIDER_UNSPECIFIED",
+          "CHARGING_PROVIDER_ECARUP",
+          "CHARGING_PROVIDER_HUBJECT"
+        ],
+        "type": "string",
+        "description": "The provider through which the charging was started. New values may be added in the future,\r\nclients must tolerate values they do not know.\r\n- 0: (CHARGING_PROVIDER_UNSPECIFIED, default) The provider could not be determined\r\n- 1: (CHARGING_PROVIDER_ECARUP) The charging was started through eCarUp itself\r\n- 2: (CHARGING_PROVIDER_HUBJECT) The charging was started through the Hubject roaming platform"
+      },
+      "PublicApi.ChargingHistory.GetChargingHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "paginationCursor": {
+            "type": "string"
+          },
+          "histories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.ChargingHistory.ChargingHistory"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.ChargingHistory.SignedTransactionFormat": {
+        "enum": [
+          "UNKNOWN",
+          "OCMF"
+        ],
+        "type": "string"
+      },
+      "PublicApi.Stations.Connector": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the connector. Same as the smart-me device id"
+          },
+          "number": {
+            "type": "integer",
+            "description": "The number of the connector",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the connector"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the connector"
+          },
+          "plugtype": {
+            "$ref": "#/components/schemas/PublicApi.Stations.PlugType"
+          },
+          "maxpower": {
+            "type": "integer",
+            "description": "The maximum power in W",
+            "format": "int32"
+          },
+          "state": {
+            "$ref": "#/components/schemas/PublicApi.Stations.ConnectorState"
+          },
+          "activeEnergyImport": {
+            "type": "number",
+            "description": "The counter value \"active energy import\". Obis: 1.8.0. in Wh",
+            "format": "double"
+          },
+          "activeEnergyExport": {
+            "type": "number",
+            "description": "The counter value \"active energy export\". Obis: 2.8.0. in Wh",
+            "format": "double"
+          },
+          "activePowerTotal": {
+            "type": "number",
+            "description": "The active power. Sum of all phases. In W",
+            "format": "double"
+          },
+          "currentL1": {
+            "type": "number",
+            "description": "The current phase L1. In A",
+            "format": "double"
+          },
+          "currentL2": {
+            "type": "number",
+            "description": "The current phase L2. In A",
+            "format": "double"
+          },
+          "currentL3": {
+            "type": "number",
+            "description": "The current phase L3. In A",
+            "format": "double"
+          },
+          "access": {
+            "$ref": "#/components/schemas/PublicApi.Stations.ConnectorAccess"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.ConnectorAccess": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PublicApi.Stations.ConnectorAccessType"
+          },
+          "specialUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.Stations.ConnectorAccessUser"
+            },
+            "description": "Special users of the connector"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.ConnectorAccessType": {
+        "enum": [
+          "PUBLIC",
+          "LIMITED",
+          "PRIVATE"
+        ],
+        "type": "string"
+      },
+      "PublicApi.Stations.ConnectorAccessUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.ConnectorState": {
+        "enum": [
+          "AVAILABLE",
+          "PREPARING",
+          "CHARGING",
+          "SUSPENDEDEVSE",
+          "SUSPENDEDEV",
+          "FINISHING",
+          "RESERVED",
+          "UNAVAILABLE",
+          "FAULTED",
+          "DEACTIVATIONPENDING"
+        ],
+        "type": "string"
+      },
+      "PublicApi.Stations.GetAllStationsResponse": {
+        "type": "object",
+        "properties": {
+          "stations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.Stations.Station"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.PlugType": {
+        "enum": [
+          "PLUG_TYPE_UNKNOWN",
+          "PLUG_TYPE_TYPE2",
+          "PLUG_TYPE_SCHUKO",
+          "PLUG_TYPE_SWISS",
+          "PLUG_TYPE_UK",
+          "PLUG_TYPE_CCS",
+          "PLUG_TYPE_CHADEMO"
+        ],
+        "type": "string"
+      },
+      "PublicApi.Stations.Station": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the station"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the station"
+          },
+          "serialnumber": {
+            "type": "integer",
+            "description": "The serialnumber of the station",
+            "format": "int64"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "The coordinate of the station (latitude)",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "The coordinate of the station (latitude)",
+            "format": "double"
+          },
+          "connectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.Stations.Connector"
+            },
+            "description": "All connectors of the stations (1-n)"
+          },
+          "stationGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicApi.Stations.StationGroup"
+            },
+            "description": "The groups the station belongs to"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.StationGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the station group"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the station group"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicApi.Stations.StationsFilter": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "(optional) Filter for the stations.\r\n- 0: (OwnedAndManagedAndViewed, default) Gets all stations of this user and all stations this user has management or view access to\r\n- 1: (Owned) Gets only the stations of this user\r\n- 2: (Managed) Gets only the stations of other users this user has management access to\r\n- 3: (Viewed) Gets only the stations of other users this user has view access to",
+        "format": "int32"
+      }
+    },
+    "securitySchemes": {
+      "OAuth": {
+        "type": "oauth2",
+        "description": "Using smart-me oauth server. Please create the client credentials on smart-me",
+        "flows": {
+          "clientCredentials": {
+            "authorizationUrl": "https://api.smart-me.com/oauth/authorize",
+            "tokenUrl": "https://api.smart-me.com/oauth/token",
+            "scopes": { }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth": [ ]
+    }
+  ]
+}

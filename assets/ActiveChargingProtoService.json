@@ -1,0 +1,18 @@
+{
+  "id": "sample-active-charging-id",
+  "status": "ACTIVE",
+  "startTime": "2025-11-15T12:00:00Z",
+  "startMeterValueWh": 1000000,
+  "price": {
+    "currency": "EUR",
+    "consumptionPerKwh": 0.95,
+    "timePerH": 0
+  },
+  "transaction": {
+    "transactionId": "sample-transaction-id",
+    "meterStartWh": 1000000,
+    "meterActivePowerW": 7.2,
+    "meterActiveEnergyWh": 1012000
+  },
+  "stationGroups": []
+}
