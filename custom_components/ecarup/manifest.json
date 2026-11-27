@@ -1,11 +1,12 @@
 {
   "domain": "ecarup",
   "name": "eCarUp",
-  "codeowners": [],
+  "codeowners": ["@Gompman"],
   "config_flow": true,
   "documentation": "https://github.com/Gompman/ecarup-ha-integration",
+  "issue_tracker": "https://github.com/Gompman/ecarup-ha-integration/issues",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
   "requirements": [],
-  "version": "0.5.0"
+  "version": "0.0.1"
 }
